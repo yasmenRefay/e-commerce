@@ -1,0 +1,17 @@
+{
+  "navbar" : {
+    "Home" : "الرئيسيه",
+    "products" : "المنتجات",
+    "categories" : "الاقسام",
+    "brands" : "العلامات التجاريه",
+    "signout" : "تسجيل خروج",
+    "wishList" : "سله المفضلات",
+    "lang" : "ع"
+  },
+
+  "home" : {
+    "Shop Popular Categories " : " تسوق الفئات الاكثر طلبا",
+    "Shop Popular Products " : " تسوق المنتجات الاكثر طلبا",
+    "What Are You Looking For ? " : "ماذا تبحث عن ؟ "
+  }
+}

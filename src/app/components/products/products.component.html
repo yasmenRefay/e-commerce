@@ -1,0 +1,41 @@
+<!----------------------------------------------------- products ------------------------------------->
+<section class="pt-32">
+
+  <!--------------------------------------------------- search --------------------------------------->
+  <input [(ngModel)]="text" type="search" placeholder= "{{'home.What Are You Looking For ? ' | translate }} "  class="p-2 m-6 w-3/4 mx-auto shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" />
+  <!--------------------------------------------------- search end --------------------------------------->
+
+    <div>
+      <h3 class="font-semibold text-3xl py-3"> {{ "home.Shop Popular Products " | translate }} :  </h3>
+      <div class="md:grid md:grid-cols-6 grid grid-cols-3 gap-4">
+        @for (product of productList| search : text ;track product.id)
+        {
+          <div class="product px-5 py-2">
+            <div [routerLink]="['/details',product.id]" class="cursor-pointer">
+              <img class="w-full" [src]="product.imageCover" [alt]="product.title" />
+              <h3 class="text-main text-sm">{{product.category.name}}</h3>
+              <h4 class="text-xs">{{product.title.split(" ",2).join(" ")}}</h4>
+              <div class="md:flex md:justify-between md:items-center">
+                <span class="text-xs pt-3">{{product.price}} EGP</span>
+                <div>
+                  <!----------------------------- create stars -------------------------->
+                  @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index)
+                  {
+                    <span class="text-xs"> <i class="fas fa-star rating-color"></i> </span>
+                  }
+                  <!--------------------------- create half star ------------------------>
+                  @if (product.ratingsAverage %1 !== 0)
+                  {
+                    <span class="text-xs"> <i class="fas fa-star-half-stroke rating-color"></i> </span>
+                  }
+                  <span class="text-xs">{{product.ratingsAverage}}</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-main w-full" (click)=" addCart(product.id) ">Add to cart</button>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+

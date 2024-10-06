@@ -1,0 +1,114 @@
+<section class="bg-main-light shadow-xl p-4 my-8 rounded-lg">
+  <h3 class="text-2xl text-main font-semibold">Register Now:</h3>
+  <form class="p-5 " [formGroup]="registerform" (ngSubmit)="registerSubmit()">
+    <!----------------------------------------------------------- Name Input ------------------------------------------------------------->
+    <div class="mb-6">
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">name</label>
+      <input formControlName="name" type="text" id="name" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" />
+      <!------------------------------------------------- Alert Message control name reqired --------------------------------------------------->
+      @if(registerform.get('name')?.errors && (registerform.get('name')?.touched || registerform.get('name')?.dirty ))
+      {
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          @if(registerform.get('name')?.getError('required'))
+            {
+              <span class="font-medium">Name Is Required</span>
+            }
+          @else if(registerform.get('name')?.getError('minLength'))
+            {
+              <span class="font-medium">Name Should be more than or equal 3 chars</span>
+            }
+          @else if(registerform.get('name')?.getError('maxLength'))
+            {
+              <span class="font-medium">Name Should be less than or equal 20 chars</span>
+            }
+        </div>
+      }
+    </div>
+    <!----------------------------------------------------------- Email Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+        <input formControlName="email"  type="email" id="email" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control Email --------------------------------------------------->
+        @if(registerform.get('email')?.errors && (registerform.get('email')?.touched || registerform.get('email')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(registerform.get('email')?.getError('required'))
+              {
+                <span class="font-medium">Email Is Required</span>
+              }
+            @else if(registerform.get('email')?.getError('email'))
+              {
+                <span class="font-medium">Enter valid Email</span>
+              }
+          </div>
+        }
+      </div>
+      <!----------------------------------------------------------- Phone Input ------------------------------------------------------------->
+      <div class="mb-6">
+        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+        <input formControlName="phone"  type="tel" id="phone" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control phone --------------------------------------------------->
+        @if(registerform.get('phone')?.errors && (registerform.get('phone')?.touched || registerform.get('phone')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(registerform.get('phone')?.getError('required'))
+              {
+                <span class="font-medium">phone Number Is Required</span>
+              }
+            @else if(registerform.get('phone')?.getError('pattern'))
+              {
+                <span class="font-medium">Enter valid phone Number</span>
+              }
+          </div>
+        }
+      </div>
+    <!----------------------------------------------------------- Password Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+        <input formControlName="password"  type="password" id="password" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control password --------------------------------------------------->
+        @if(registerform.get('password')?.errors && (registerform.get('password')?.touched || registerform.get('password')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(registerform.get('password')?.getError('required'))
+              {
+                <span class="font-medium">password Is Required</span>
+              }
+            @else if(registerform.get('password')?.getError('pattern'))
+              {
+                <span class="font-medium">Enter valid password</span>
+              }
+          </div>
+        }
+      </div>
+    <!----------------------------------------------------------- rePassword Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+        <input  formControlName="rePassword"  type="password" id="confirm_password" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" />
+        <!------------------------------------------------- Alert Message control repassword --------------------------------------------------->
+        @if(registerform.getError('mismatch') && (registerform.get('rePassword')?.touched || registerform.get('rePassword')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">password conformation is incorrect</span>
+          </div>
+        }
+      </div>
+    <button [disabled]="registerform.invalid || isLoading" class="text-white ms-auto block btn-main hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+      Register
+      @if (isLoading)
+      {
+        <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+      }
+    </button>
+    <!------------------------------------------------------- show Error ---------------------------------------------------------------->
+    @if (msgError)
+    {
+      <p class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"> {{msgError}} </p>
+    }
+    <!---------------------------------------------- show success before programming Routing -------------------------------------------->
+    @if (msgSuccess)
+    {
+      <p class="p-4 mb-4 text-xl text-center font-semibold text-green-800 rounded-lg bg-green-200 dark:bg-gray-800 dark:text-green-400" role="alert"> Success</p>
+    }
+  </form>
+</section>

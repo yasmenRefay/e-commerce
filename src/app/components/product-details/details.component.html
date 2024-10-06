@@ -1,0 +1,43 @@
+<!-- if condition to show this section when data coming only to prevent appear undiefined before data coming -->
+@if( productDetails)
+{
+  <section>
+    <h3 class="text-center font-semibold text-3xl text-main mt-10">Details Product</h3>
+    <div class="flex py-5 items-center">
+      <div class="w-1/4 p-3">
+        <owl-carousel-o [options]="customOptions">
+          @for (img of imgList; track $index)
+          {
+            <ng-template carouselSlide>
+              <img [src]="img" [alt]="productDetails.title" />
+            </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+      <div class="w-3/4 p-3">
+        <p class="text-xl">{{productDetails.description}}</p>
+        <h3 class="text-gray-600 text-sm py-5">{{productDetails.category.name}}</h3>
+        <h4 class="text-xs">{{productDetails.title.split(" ",2).join(" ")}}</h4>
+        <div class="flex justify-between items-center">
+          <span class="text-xs pt-3">{{productDetails.price}} EGP</span>
+          <div>
+            <!----------------------------- create stars -------------------------->
+            @for (num of [1,2,3,4,5].slice(0,productDetails.ratingsAverage); track $index)
+              {
+                <span class="text-xs"> <i class="fas fa-star rating-color"></i> </span>
+              }
+            <!--------------------------- create half star ------------------------>
+            @if (productDetails.ratingsAverage %1 !== 0)
+              {
+                <span class="text-xs"> <i class="fas fa-star-half-stroke rating-color"></i> </span>
+              }
+                <span class="text-xs">{{productDetails.ratingsAverage}}</span>
+            </div>
+        </div>
+        <button (click)="addToCart(productDetails._id)" class="btn-main w-full my-5">Add to cart</button>
+      </div>
+      </div>
+    </section>
+}
+
+

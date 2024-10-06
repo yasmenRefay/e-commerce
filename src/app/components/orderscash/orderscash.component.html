@@ -1,0 +1,84 @@
+<section class="bg-main-light shadow-xl p-4 my-8 rounded-lg w-3/4 mx-auto">
+  <h3 class="text-2xl text-main font-semibold">shipping Address</h3>
+  <form class="p-5 " [formGroup]="ordercashForm" (ngSubmit)="orderSubmit()">
+
+    <!----------------------------------------------------------- details Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Details</label>
+        <textarea formControlName="details" id="details" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+        <!------------------------------------------------- Alert Message control details --------------------------------------------------->
+        @if(ordercashForm.get('details')?.errors && (ordercashForm.get('details')?.touched || ordercashForm.get('details')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(ordercashForm.get('details')?.getError('required'))
+            {
+              <span class="font-medium">details Is Required</span>
+            }
+          @else if(ordercashForm.get('details')?.getError('minLength'))
+            {
+              <span class="font-medium">details Should be more than or equal 3 chars</span>
+            }
+          @else if(ordercashForm.get('details')?.getError('maxLength'))
+            {
+              <span class="font-medium">details Should be less than or equal 40 chars</span>
+            }
+          </div>
+        }
+        </textarea>
+      </div>
+      <!----------------------------------------------------------- Phone Input ------------------------------------------------------------->
+      <div class="mb-6">
+        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+        <input formControlName="phone"  type="tel" id="phone" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control phone --------------------------------------------------->
+        @if(ordercashForm.get('phone')?.errors && (ordercashForm.get('phone')?.touched || ordercashForm.get('phone')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(ordercashForm.get('phone')?.getError('required'))
+              {
+                <span class="font-medium">phone Number Is Required</span>
+              }
+            @else if(ordercashForm.get('phone')?.getError('pattern'))
+              {
+                <span class="font-medium">Enter valid phone Number</span>
+              }
+          </div>
+        }
+      </div>
+    <!----------------------------------------------------------- city Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">city</label>
+        <input formControlName="city"  type="text" id="city" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control city --------------------------------------------------->
+        @if(ordercashForm.get('city')?.errors && (ordercashForm.get('city')?.touched || ordercashForm.get('city')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(ordercashForm.get('city')?.getError('required'))
+              {
+                <span class="font-medium">city Is Required</span>
+              }
+          </div>
+        }
+      </div>
+
+    <button [disabled]="ordercashForm.invalid || isLoading" class="text-white ms-auto block btn-main hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+      Check Out
+      @if (isLoading)
+      {
+        <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+      }
+    </button>
+
+
+    <!------------------------------------------------------- show Error ---------------------------------------------------------------->
+    @if (msgError)
+    {
+      <p class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"> {{msgError}} </p>
+    }
+    <!---------------------------------------------- show success before programming Routing -------------------------------------------->
+    @if (msgSuccess)
+    {
+      <p class="p-4 mb-4 text-xl text-center font-semibold text-green-800 rounded-lg bg-green-200 dark:bg-gray-800 dark:text-green-400" role="alert"> Success</p>
+    }
+  </form>
+</section>

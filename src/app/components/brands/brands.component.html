@@ -1,0 +1,13 @@
+<section class="pt-32" >
+  <h2 class="text-main text-2xl text-center font-semibold p-5 "> All Brands </h2>
+    <div class="md:grid md:grid-cols-4 grid grid-cols-1 gap-4">
+      @for (item of brandsList; track $index)
+      {
+        <div  (click)="showSepacificBrands(item._id)" class="product px-5 py-2 ">
+          <img class="w-full" [src]="item.image" [alt]="item.name"/>
+          <h3 class="text-center font-medium text-lg p-4 ">{{item.name}}</h3>
+        </div>
+      }
+    </div>
+</section>
+

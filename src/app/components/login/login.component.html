@@ -1,0 +1,64 @@
+<section class="bg-main-light shadow-xl p-4 my-8 rounded-lg">
+  <h3 class="text-2xl text-main font-semibold">Login Now:</h3>
+  <form class="p-5 " [formGroup]="loginform" (ngSubmit)="loginSubmit()">
+    <!----------------------------------------------------------- Email Input ------------------------------------------------------------->
+    <div class="mb-6">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+      <input formControlName="email"  type="email" id="email" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+      <!------------------------------------------------- Alert Message control email --------------------------------------------------->
+      @if(loginform.get('email')?.errors && (loginform.get('email')?.touched || loginform.get('email')?.dirty ))
+      {
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          @if(loginform.get('email')?.getError('required'))
+            {
+              <span class="font-medium">email Is Required</span>
+            }
+          @else if(loginform.get('email')?.getError('email'))
+            {
+              <span class="font-medium">Enter valid email</span>
+            }
+        </div>
+      }
+      </div>
+    <!----------------------------------------------------------- Password Input ------------------------------------------------------------->
+    <div class="mb-6">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+        <input formControlName="password"  type="password" id="password" class="shadow-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"/>
+        <!------------------------------------------------- Alert Message control password --------------------------------------------------->
+        @if(loginform.get('password')?.errors && (loginform.get('password')?.touched || loginform.get('password')?.dirty ))
+        {
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            @if(loginform.get('password')?.getError('required'))
+              {
+                <span class="font-medium">password Is Required</span>
+              }
+            @else if(loginform.get('password')?.getError('pattern'))
+              {
+                <span class="font-medium">Enter valid password</span>
+              }
+          </div>
+        }
+      </div>
+      <div class="flex gap-4 justify-end items-center">
+        <a routerLink="/forgot" class="text-green-500 cursor-pointer text-lg hover:text-blue-600 font-semibold">Forget your Password</a>
+        <button [disabled]="loginform.invalid || isLoading" class="text-white btn-main hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          login
+          @if (isLoading)
+          {
+            <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+          }
+        </button>
+      </div>
+    <!------------------------------------------------------- show Error ---------------------------------------------------------------->
+    @if (msgError)
+    {
+      <p class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"> {{msgError}} </p>
+    }
+    <!---------------------------------------------- show success before programming Routing -------------------------------------------->
+    @if (msgSuccess)
+    {
+      <p class="p-4 mb-4 text-xl text-center font-semibold text-green-800 rounded-lg bg-green-200 dark:bg-gray-800 dark:text-green-400" role="alert"> Success</p>
+    }
+  </form>
+</section>
+

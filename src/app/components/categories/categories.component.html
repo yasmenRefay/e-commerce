@@ -1,0 +1,21 @@
+<section class="pt-32">
+  <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 ">
+    @for (item of cartegoriesList(); track item._id)
+    {
+      <div (click)="getspecific(item._id)" class="product">
+        <div class="w-full h-72">
+          <img [src]="item.image"  [alt]="item.name" class="w-full h-full" />
+        </div>
+        <p class="border-t p-4 text-center text-main font-bold text-2xl"> {{item.name}} </p>
+      </div>
+    }
+  </div>
+<!-- Get specific category -->
+  <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4  pt-4 ">
+    @for (item of spCategroisList(); track $index)
+    {
+      <p class="border border-gray-400 product rounded p-4 font-bold text-2xl text-center"> {{item.name}} </p>
+    }
+  </div>
+</section>
+

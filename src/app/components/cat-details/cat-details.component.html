@@ -1,0 +1,14 @@
+<!-- if condition to show this section when data coming only to prevent appear undiefined before data coming -->
+@if( catDetails)
+{
+  <section>
+    <h3 class="text-center font-semibold text-3xl py-3 text-main">Details category</h3>
+    <div class="flex py-5 items-center justify-center flex-col">
+        <img [src]="catDetails.image" [alt]="catDetails.name"  class="w-[30%]"/>
+        <p class="text-xl font-semibold p-4">{{catDetails.slug}}</p>
+      </div>
+    </section>
+}
+
+
+
